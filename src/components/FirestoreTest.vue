@@ -29,9 +29,7 @@ export default {
     await this.READ_DATA()
   },
   methods: {
-    ...mapActions('user', [
-      'READ_DATA'
-    ]),
+    ...mapActions('user', ['READ_DATA']),
     setData() {
       let db = firebase.firestore()
       db.collection('users')
