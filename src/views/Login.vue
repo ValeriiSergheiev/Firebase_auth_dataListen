@@ -32,7 +32,7 @@ export default {
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
         this.error = ''
-        console.log(response.user)
+        console.log(response)
       } catch (e) {
         this.error = e.message
       }
