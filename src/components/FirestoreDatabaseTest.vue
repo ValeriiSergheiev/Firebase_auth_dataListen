@@ -14,8 +14,13 @@
           <td>{{ user.phone }}</td>
           <td>{{ user.address.city }}</td>
           <td>
-            <input type="text" v-model="names[index]" />
-            <button @click="editUserName(names[index], index)">Edit Name</button>
+            <input
+              type="text"
+              v-model.lazy="user.name"
+              @change="editUserName(user.name, index)"
+            />
+            <!--<input type="text" v-model="names[index]" />
+            <button @click="editUserName(names[index], index)">Edit Name</button>-->
           </td>
         </tr>
       </table>
@@ -29,19 +34,19 @@ import firebase from 'firebase/app'
 export default {
   name: 'FirestoreDatabaseTest',
   data: () => ({
-    users: null,
-    names: []
+    users: null
+    // names: []
   }),
   mounted() {
     const usersRef = firebase.database().ref('users')
     usersRef.on('value', snapshot => {
-      this.names = []
+      // this.names = []
       this.users = snapshot.val()
 
-      this.users.forEach(user => {
+      /*this.users.forEach(user => {
         this.names.push(user.name)
       })
-      console.log(this.names)
+      console.log(this.names)*/
     })
   },
   computed: {
@@ -54,6 +59,7 @@ export default {
   },
   methods: {
     editUserName(newName, index) {
+      // console.log(newName + ' ' + index)
       firebase
         .database()
         .ref(`users/${index}`)
